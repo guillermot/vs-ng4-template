@@ -1,0 +1,40 @@
+﻿<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="header">
+                        <h4>User Form!!</h4>
+                    </div>
+                    <div class="content">
+                        <!--id="user-form-validation" role="form" data-toggle="validator" (ngSubmit)="click()"-->
+                        <form #userform="ngForm" (ngSubmit)="click()">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Firstname</label>
+                                        <input type="text" class="form-control" placeholder="Firstname" [(ngModel)]="model.firstname" name="firsname" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Lastname</label>
+                                        <input type="text" class="form-control" placeholder="Lastname" [(ngModel)]="model.lastname" name="lastname" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <input type="email" class="form-control" placeholder="Email" [(ngModel)]="model.email" name="email" />
+                                    </div>
+                                </div>
+                            </div>
+                            <button [disabled]="!userform.valid" class="btn btn-primary btn-fill pull-right" type="submit">Guardar</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

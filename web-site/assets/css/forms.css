@@ -1,0 +1,8 @@
+﻿.form-control.error {
+    color: #FB404B;
+    border-color: #FB404B;
+}
+
+label.error {
+    color: #FB404B;
+}

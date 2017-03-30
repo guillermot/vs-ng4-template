@@ -1,0 +1,41 @@
+﻿<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="header">
+                        <h4>User Form Reactive!!</h4>
+                    </div>
+                    <div class="content">
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Firstname</label>
+                                        <input type="text" class="form-control" placeholder="Firstname" name="firstname" formControlName="firstname"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Lastname</label>
+                                        <input type="text" class="form-control" placeholder="Lastname"  name="lastname" formControlName="lastname" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <input type="email" class="form-control" placeholder="Email" formControlName="email" name="email" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p>Form value: {{ form.value | json }}</p>
+                            <button class="btn btn-primary btn-fill pull-right" type="submit" [disabled]="!form.valid">Guardar</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -147,6 +147,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +160,8 @@
     <Content Include="app\dashboard\table\table.component.html" />
     <Content Include="app\dashboard\typography\typography.component.html" />
     <Content Include="app\dashboard\upgrade\upgrade.component.html" />
+    <Content Include="app\dashboard\user-form-reactive\user-form-reactive.component.html" />
+    <Content Include="app\dashboard\user-form\user-form.component.html" />
     <Content Include="app\dashboard\user\user.component.html" />
     <Content Include="app\shared\footer\footer.component.html" />
     <Content Include="app\shared\navbar\navbar.component.html" />
@@ -166,6 +169,7 @@
     <Content Include="assets\css\animate.min.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\demo.css" />
+    <Content Include="assets\css\forms.css" />
     <Content Include="assets\css\light-bootstrap-dashboard.css" />
     <Content Include="assets\css\pe-icon-7-stroke.css" />
     <Content Include="assets\fonts\Pe-icon-7-stroke.svg" />
@@ -307,7 +311,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -336,6 +339,8 @@
     <TypeScriptCompile Include="app\dashboard\notifications\notifications.component.ts" />
     <TypeScriptCompile Include="app\dashboard\typography\typography.component.ts" />
     <TypeScriptCompile Include="app\dashboard\upgrade\upgrade.component.ts" />
+    <TypeScriptCompile Include="app\dashboard\user-form-reactive\user-form-reactive.component.ts" />
+    <TypeScriptCompile Include="app\dashboard\user-form\user-form.component.ts" />
     <TypeScriptCompile Include="app\dashboard\user\user.component.ts" />
     <TypeScriptCompile Include="app\shared\footer\footer.component.ts" />
     <TypeScriptCompile Include="app\shared\footer\footer.module.ts" />
