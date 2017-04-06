@@ -7,6 +7,7 @@ export enum MenuType {
 export interface RouteInfo {
     path: string;
     title: string;
-    menuType: MenuType;
-    icon: string;
+    menuType?: MenuType;
+    icon?: string;
+    items?: RouteInfo[];
 }

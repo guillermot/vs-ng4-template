@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
 var forms_1 = require("@angular/forms");
 var platform_browser_1 = require("@angular/platform-browser");
 var animations_1 = require("@angular/platform-browser/animations");
@@ -19,6 +20,7 @@ var DashboardModule = (function () {
 DashboardModule = __decorate([
     core_1.NgModule({
         imports: [
+            http_1.HttpModule,
             platform_browser_1.BrowserModule,
             animations_1.NoopAnimationsModule,
             forms_1.ReactiveFormsModule,

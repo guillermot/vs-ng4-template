@@ -147,12 +147,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GridResult.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.component.html" />
     <Content Include="app\dashboard\dashboard.component.html" />
+    <Content Include="app\dashboard\grid-data\grid-data.component.html" />
     <Content Include="app\dashboard\home\home.component.html" />
     <Content Include="app\dashboard\icons\icons.component.html" />
     <Content Include="app\dashboard\maps\maps.component.html" />
@@ -333,6 +335,7 @@
     <TypeScriptCompile Include="app\dashboard\dashboard.component.ts" />
     <TypeScriptCompile Include="app\dashboard\dashboard.module.ts" />
     <TypeScriptCompile Include="app\dashboard\dashboard.routes.ts" />
+    <TypeScriptCompile Include="app\dashboard\grid-data\grid-data.component.ts" />
     <TypeScriptCompile Include="app\dashboard\home\home.component.ts" />
     <TypeScriptCompile Include="app\dashboard\icons\icons.component.ts" />
     <TypeScriptCompile Include="app\dashboard\maps\maps.component.ts" />

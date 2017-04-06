@@ -1,0 +1,39 @@
+﻿<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="header">
+                        <h4>Grid Data</h4>
+                    </div>
+                    <div class="content">
+                        <table class="table table-striped table-condensed table-hover">
+                            <tr *ngFor="let user of users">
+                                <td>{{ user.Firstname }}</td>
+                                <td>{{ user.Lastname }}</td>
+                                <td>{{ user.Email }}</td>
+                            </tr>
+                        </table>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li *ngFor="let number of pages; let i = index;" style="cursor:pointer;">
+                                    <a (click)="changePage(i + 1)">{{i + 1}}</a>
+                                </li>
+                                <li>
+                                    <a href="#" aria-label="Next" style="cursor:pointer;">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

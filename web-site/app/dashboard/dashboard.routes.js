@@ -9,6 +9,7 @@ var maps_component_1 = require("./maps/maps.component");
 var upgrade_component_1 = require("./upgrade/upgrade.component");
 var user_form_component_1 = require("./user-form/user-form.component");
 var user_form_reactive_component_1 = require("./user-form-reactive/user-form-reactive.component");
+var grid_data_component_1 = require("./grid-data/grid-data.component");
 exports.MODULE_ROUTES = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: home_component_1.HomeComponent },
@@ -20,7 +21,8 @@ exports.MODULE_ROUTES = [
     { path: 'maps', component: maps_component_1.MapsComponent },
     { path: 'upgrade', component: upgrade_component_1.UpgradeComponent },
     { path: 'user-form', component: user_form_component_1.UserFormComponent },
-    { path: 'user-form-reactive', component: user_form_reactive_component_1.UserFormReactiveComponent }
+    { path: 'user-form-reactive', component: user_form_reactive_component_1.UserFormReactiveComponent },
+    { path: 'grid-data', component: grid_data_component_1.GridDataComponent }
 ];
 exports.MODULE_COMPONENTS = [
     home_component_1.HomeComponent,
@@ -32,6 +34,7 @@ exports.MODULE_COMPONENTS = [
     maps_component_1.MapsComponent,
     upgrade_component_1.UpgradeComponent,
     user_form_component_1.UserFormComponent,
-    user_form_reactive_component_1.UserFormReactiveComponent
+    user_form_reactive_component_1.UserFormReactiveComponent,
+    grid_data_component_1.GridDataComponent
 ];
 //# sourceMappingURL=dashboard.routes.js.map
