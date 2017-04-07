@@ -1,7 +1,11 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
+
+declare var swal: any;
+declare var $: any;
 
 @Component({
     selector: 'grid-data',
@@ -17,8 +21,18 @@ export class GridDataComponent implements OnInit {
     totalPages: number;
     pages: any[];
 
-    constructor(private http: Http) {
-        this.page = 1;
+    pageObservable: Observable<number>;
+
+    constructor(private http: Http, private route: ActivatedRoute) {
+
+        this.route
+            .params
+            .map(params => params['page'])
+            .subscribe((page) => {
+                this.page = parseInt(page);
+                this.loadGrid();
+            });
+
         this.pageSize = 3;
     }
 
@@ -33,8 +47,23 @@ export class GridDataComponent implements OnInit {
         this.loadGrid();
     }
 
+    deleteUser(user: any) {
+        swal({
+            title: "Are you sure?",
+            text: "You are about to delete the following user: " + user.Firstname + " " + user.Lastname,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: true
+        },
+            function () {
+                $.notify("User delete!!");
+            });
+    }
+
     loadGrid() {
-        this.http.get('http://localhost:49376/Home/Users?page=' + this.page + '&pageSize=' + this.pageSize)
+        this.http.get('/Home/Users?page=' + this.page + '&pageSize=' + this.pageSize)
             .map(function (res: Response) {
                 return res.json();
             })
@@ -48,6 +77,7 @@ export class GridDataComponent implements OnInit {
                 console.log(this.pages);
                 console.log('totalPages = ' + this.totalPages);
                 console.log('totalItems = ' + this.totalItems);
+                console.log('page = ' + this.page);
             });
     }
 }

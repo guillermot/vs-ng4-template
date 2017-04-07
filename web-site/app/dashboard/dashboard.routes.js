@@ -22,7 +22,8 @@ exports.MODULE_ROUTES = [
     { path: 'upgrade', component: upgrade_component_1.UpgradeComponent },
     { path: 'user-form', component: user_form_component_1.UserFormComponent },
     { path: 'user-form-reactive', component: user_form_reactive_component_1.UserFormReactiveComponent },
-    { path: 'grid-data', component: grid_data_component_1.GridDataComponent }
+    { path: 'user-form-reactive/:id', component: user_form_reactive_component_1.UserFormReactiveComponent },
+    { path: 'grid-data/:page', component: grid_data_component_1.GridDataComponent }
 ];
 exports.MODULE_COMPONENTS = [
     home_component_1.HomeComponent,

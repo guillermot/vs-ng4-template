@@ -24,7 +24,8 @@ export const MODULE_ROUTES: Route[] = [
     { path: 'upgrade', component: UpgradeComponent },
     { path: 'user-form', component: UserFormComponent },
     { path: 'user-form-reactive', component: UserFormReactiveComponent },
-    { path: 'grid-data', component: GridDataComponent }
+    { path: 'user-form-reactive/:id', component: UserFormReactiveComponent },
+    { path: 'grid-data/:page', component: GridDataComponent }
 ]
 
 export const MODULE_COMPONENTS = [

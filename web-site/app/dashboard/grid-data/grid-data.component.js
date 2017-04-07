@@ -10,11 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var router_1 = require("@angular/router");
 require("rxjs/add/operator/map");
 var GridDataComponent = (function () {
-    function GridDataComponent(http) {
+    function GridDataComponent(http, route) {
+        var _this = this;
         this.http = http;
-        this.page = 1;
+        this.route = route;
+        this.route
+            .params
+            .map(function (params) { return params['page']; })
+            .subscribe(function (page) {
+            _this.page = parseInt(page);
+            _this.loadGrid();
+        });
         this.pageSize = 3;
     }
     GridDataComponent.prototype.ngOnInit = function () {
@@ -26,9 +35,22 @@ var GridDataComponent = (function () {
         this.page = newPage;
         this.loadGrid();
     };
+    GridDataComponent.prototype.deleteUser = function (user) {
+        swal({
+            title: "Are you sure?",
+            text: "You are about to delete the following user: " + user.Firstname + " " + user.Lastname,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: true
+        }, function () {
+            $.notify("User delete!!");
+        });
+    };
     GridDataComponent.prototype.loadGrid = function () {
         var _this = this;
-        this.http.get('http://localhost:49376/Home/Users?page=' + this.page + '&pageSize=' + this.pageSize)
+        this.http.get('/Home/Users?page=' + this.page + '&pageSize=' + this.pageSize)
             .map(function (res) {
             return res.json();
         })
@@ -41,6 +63,7 @@ var GridDataComponent = (function () {
             console.log(_this.pages);
             console.log('totalPages = ' + _this.totalPages);
             console.log('totalItems = ' + _this.totalItems);
+            console.log('page = ' + _this.page);
         });
     };
     return GridDataComponent;
@@ -50,7 +73,7 @@ GridDataComponent = __decorate([
         selector: 'grid-data',
         templateUrl: './grid-data.component.html'
     }),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [http_1.Http, router_1.ActivatedRoute])
 ], GridDataComponent);
 exports.GridDataComponent = GridDataComponent;
 //# sourceMappingURL=grid-data.component.js.map

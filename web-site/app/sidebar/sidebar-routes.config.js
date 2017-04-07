@@ -17,7 +17,7 @@ exports.ROUTES = [
         items: [
             { path: 'user-form', title: 'Template Form' },
             { path: 'user-form-reactive', title: 'Reactive Form' },
-            { path: 'grid-data', title: 'Grid Data' }
+            { path: 'grid-data/1', title: 'Grid Data' }
         ]
     }
 ];
