@@ -13,10 +13,11 @@ var http_1 = require("@angular/http");
 var router_1 = require("@angular/router");
 require("rxjs/add/operator/map");
 var GridDataComponent = (function () {
-    function GridDataComponent(http, route) {
+    function GridDataComponent(http, route, router) {
         var _this = this;
         this.http = http;
         this.route = route;
+        this.router = router;
         this.route
             .params
             .map(function (params) { return params['page']; })
@@ -36,6 +37,9 @@ var GridDataComponent = (function () {
         this.loadGrid();
     };
     GridDataComponent.prototype.deleteUser = function (user) {
+        var http = this.http;
+        var router = this.router;
+        var self = this;
         swal({
             title: "Are you sure?",
             text: "You are about to delete the following user: " + user.Firstname + " " + user.Lastname,
@@ -45,7 +49,12 @@ var GridDataComponent = (function () {
             confirmButtonText: "Yes, delete it!",
             closeOnConfirm: true
         }, function () {
-            $.notify("User delete!!");
+            http.delete('/Home/users/' + user.Id)
+                .subscribe(function () { return console.log('next'); }, function (err) { return console.error(err); }, function () {
+                $.notify("User delete!!");
+                self.page = 1;
+                self.loadGrid();
+            });
         });
     };
     GridDataComponent.prototype.loadGrid = function () {
@@ -61,9 +70,6 @@ var GridDataComponent = (function () {
             _this.totalPages = Math.ceil(_this.totalItems / _this.pageSize);
             _this.pages = Array(_this.totalPages).fill(1, _this.totalPages);
             console.log(_this.pages);
-            console.log('totalPages = ' + _this.totalPages);
-            console.log('totalItems = ' + _this.totalItems);
-            console.log('page = ' + _this.page);
         });
     };
     return GridDataComponent;
@@ -73,7 +79,7 @@ GridDataComponent = __decorate([
         selector: 'grid-data',
         templateUrl: './grid-data.component.html'
     }),
-    __metadata("design:paramtypes", [http_1.Http, router_1.ActivatedRoute])
+    __metadata("design:paramtypes", [http_1.Http, router_1.ActivatedRoute, router_1.Router])
 ], GridDataComponent);
 exports.GridDataComponent = GridDataComponent;
 //# sourceMappingURL=grid-data.component.js.map

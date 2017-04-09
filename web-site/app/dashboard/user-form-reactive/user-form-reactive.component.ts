@@ -11,6 +11,7 @@ declare var $: any;
 })
 export class UserFormReactiveComponent {
     form: FormGroup;
+    idControl: FormControl;
     firstname: FormControl;
     lastname: FormControl;
     email: FormControl;
@@ -21,12 +22,14 @@ export class UserFormReactiveComponent {
         private router: Router,
         private http: Http) {
 
+        this.idControl = new FormControl("0");
         this.firstname = new FormControl("", Validators.required);
         this.lastname = new FormControl("", Validators.required);
         this.email = new FormControl("", Validators.required);
 
         this.form = this.builder.group(
             {
+                'id': this.idControl,
                 'firstname': this.firstname,
                 'lastname': this.lastname,
                 'email': this.email
@@ -52,6 +55,7 @@ export class UserFormReactiveComponent {
                 if (val.TotalItems > 0) {
                     var user = val.Items[0];
 
+                    this.idControl.setValue(user.Id)
                     this.firstname.setValue(user.Firstname)
                     this.lastname.setValue(user.Lastname);
                     this.email.setValue(user.Email);
@@ -60,12 +64,33 @@ export class UserFormReactiveComponent {
     }
 
     onSubmit() {
-        //event.preventDefault();
-        console.log('Hellooo');
-        console.log(this.form.value);
+        var user = this.form.value;
+        console.log(user);
 
-        $.notify("User saved!!");
-
-        this.router.navigate(['grid-data', 1])
+        if (user.id > 0) {
+            this.http
+                .put('/Home/users', user)
+                .map(resp => resp.json)
+                .subscribe(
+                () => console.log('next'),
+                err => console.error(err),
+                () => {
+                    $.notify("User updated!!");
+                    this.router.navigate(['grid-data', 1]);
+                });
+        }
+        else
+        {
+            this.http
+                .post('/Home/users', user)
+                .map(resp => resp.json)
+                .subscribe(
+                () => console.log('next'),
+                err => console.error(err),
+                () => {
+                    $.notify("User created!!");
+                    this.router.navigate(['grid-data', 1]);
+                });
+        }
     }
 }

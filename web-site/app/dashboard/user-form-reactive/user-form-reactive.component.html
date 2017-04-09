@@ -28,8 +28,8 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <p>Form value: {{ form.value | json }}</p>
+                            <input type="hidden" formControlName="id"/>
+                            <p style="display:none;">Form value: {{ form.value | json }}</p>
                             <button class="btn btn-primary btn-fill pull-right" type="submit" [disabled]="!form.valid">Guardar</button>
                             <div class="clearfix"></div>
                         </form>

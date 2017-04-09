@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
@@ -23,7 +23,7 @@ export class GridDataComponent implements OnInit {
 
     pageObservable: Observable<number>;
 
-    constructor(private http: Http, private route: ActivatedRoute) {
+    constructor(private http: Http, private route: ActivatedRoute, private router: Router) {
 
         this.route
             .params
@@ -48,6 +48,9 @@ export class GridDataComponent implements OnInit {
     }
 
     deleteUser(user: any) {
+        var http = this.http;
+        var router = this.router;
+        var self = this;
         swal({
             title: "Are you sure?",
             text: "You are about to delete the following user: " + user.Firstname + " " + user.Lastname,
@@ -58,7 +61,14 @@ export class GridDataComponent implements OnInit {
             closeOnConfirm: true
         },
             function () {
-                $.notify("User delete!!");
+                http.delete('/Home/users/' + user.Id)
+                    .subscribe(() => console.log('next'),
+                    err => console.error(err),
+                    () => {
+                        $.notify("User delete!!");
+                        self.page = 1;
+                        self.loadGrid();
+                    });
             });
     }
 
@@ -75,9 +85,6 @@ export class GridDataComponent implements OnInit {
                 this.totalPages = Math.ceil(this.totalItems / this.pageSize);
                 this.pages = Array(this.totalPages).fill(1, this.totalPages);
                 console.log(this.pages);
-                console.log('totalPages = ' + this.totalPages);
-                console.log('totalItems = ' + this.totalItems);
-                console.log('page = ' + this.page);
             });
     }
 }

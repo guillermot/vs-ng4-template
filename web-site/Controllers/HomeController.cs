@@ -9,12 +9,56 @@ namespace web_site.Controllers
 {
     public class HomeController : Controller
     {
+        static IList<User> dbUsers;
+
+        public HomeController() {
+            if (dbUsers == null)
+            {
+                dbUsers = this.GetUsers();
+            }
+        }
+
         public ActionResult Index()
         {
             return View();
         }
 
-        [Route("users/{id}")]
+        [HttpPut]
+        [ActionName("users")]
+        public ActionResult UsersUpdate(User updatedUser)
+        {
+            var user = dbUsers.Where(u => u.Id == updatedUser.Id).FirstOrDefault();
+
+            user.Firstname = updatedUser.Firstname;
+            user.Lastname = updatedUser.Lastname;
+            user.Email = updatedUser.Email;
+
+            return new HttpStatusCodeResult(200);
+        }
+
+        [HttpPost]
+        [ActionName("users")]
+        public ActionResult Users(User user)
+        {
+            user.Id = dbUsers.Count + 1;
+            dbUsers.Add(user);
+            return new HttpStatusCodeResult(200);
+        }
+
+        [HttpDelete]
+        [ActionName("users")]
+        public ActionResult Users(int id)
+        {
+            var user = dbUsers.Where(u => u.Id == id).FirstOrDefault();
+
+            if (user != null)
+                dbUsers.Remove(user);
+
+            return new HttpStatusCodeResult(200);
+        }
+
+        [HttpGet]
+        [ActionName("users")]
         public ActionResult Users(int? id, int page = 1, int pageSize = 3)
         {
             IList<User> users;
@@ -22,12 +66,12 @@ namespace web_site.Controllers
 
             if (id.HasValue)
             {
-                users = this.GetUsers().Where(u => u.Id == id.Value).ToList();
+                users = dbUsers.Where(u => u.Id == id.Value).ToList();
                 result.TotalItems = 1;
             }
             else
             {
-                users = this.GetUsers().ToList();
+                users = dbUsers.ToList();
                 result.TotalItems = users.Count;
                 users = users.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             }

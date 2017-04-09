@@ -19,10 +19,12 @@ var UserFormReactiveComponent = (function () {
         this.activatedRoute = activatedRoute;
         this.router = router;
         this.http = http;
+        this.idControl = new forms_1.FormControl("0");
         this.firstname = new forms_1.FormControl("", forms_1.Validators.required);
         this.lastname = new forms_1.FormControl("", forms_1.Validators.required);
         this.email = new forms_1.FormControl("", forms_1.Validators.required);
         this.form = this.builder.group({
+            'id': this.idControl,
             'firstname': this.firstname,
             'lastname': this.lastname,
             'email': this.email
@@ -44,6 +46,7 @@ var UserFormReactiveComponent = (function () {
             .subscribe(function (val) {
             if (val.TotalItems > 0) {
                 var user = val.Items[0];
+                _this.idControl.setValue(user.Id);
                 _this.firstname.setValue(user.Firstname);
                 _this.lastname.setValue(user.Lastname);
                 _this.email.setValue(user.Email);
@@ -51,11 +54,27 @@ var UserFormReactiveComponent = (function () {
         });
     };
     UserFormReactiveComponent.prototype.onSubmit = function () {
-        //event.preventDefault();
-        console.log('Hellooo');
-        console.log(this.form.value);
-        $.notify("User saved!!");
-        this.router.navigate(['grid-data', 1]);
+        var _this = this;
+        var user = this.form.value;
+        console.log(user);
+        if (user.id > 0) {
+            this.http
+                .put('/Home/users', user)
+                .map(function (resp) { return resp.json; })
+                .subscribe(function () { return console.log('next'); }, function (err) { return console.error(err); }, function () {
+                $.notify("User updated!!");
+                _this.router.navigate(['grid-data', 1]);
+            });
+        }
+        else {
+            this.http
+                .post('/Home/users', user)
+                .map(function (resp) { return resp.json; })
+                .subscribe(function () { return console.log('next'); }, function (err) { return console.error(err); }, function () {
+                $.notify("User created!!");
+                _this.router.navigate(['grid-data', 1]);
+            });
+        }
     };
     return UserFormReactiveComponent;
 }());
